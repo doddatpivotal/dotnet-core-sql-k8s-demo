@@ -1,0 +1,6 @@
+#@data/values
+---
+todosApp:
+  containerImage: dpfefferatpivotal/employee-todo-list-api
+  ingressUrl: todos.ironislands.tkg-vsphere-lab.winterfell.live
+  dbPassword: KeepItSimple1!

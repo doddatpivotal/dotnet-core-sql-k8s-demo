@@ -1,0 +1,56 @@
+#! variables that need to be externally configurable
+#! are specified in a data values file
+
+#@ load("@ytt:data", "data")
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todos
+spec:
+  replicas: 1
+  selector:
+     matchLabels:
+       app: todos
+  template:
+    metadata:
+      labels:
+        app: todos
+    spec:
+      containers:
+      - name: todos
+        image: #@ data.values.todosApp.containerImage
+        ports:
+        - containerPort: 8080
+        env:
+        - name: ConnectionStrings__DefaultConnection
+          value: #@ "Server=mssql;Database=Master;User ID=sa;Password=" + data.values.todosApp.dbPassword + ";MultipleActiveResultSets=true;"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: todos
+spec:
+  selector:
+    app: todos
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: LoadBalancer
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: todos
+  labels:
+    app: todos
+spec:
+  rules:
+  - host: #@ data.values.todosApp.ingressUrl
+    http:
+      paths:
+      - backend:
+          serviceName: todos
+          servicePort: 80
+      
