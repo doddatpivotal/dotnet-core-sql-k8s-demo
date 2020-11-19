@@ -1,6 +1,7 @@
 #@data/values
 ---
 todosApp:
-  containerImage: dpfefferatpivotal/employee-todo-list-api
+#   containerImage: dpfefferatpivotal/employee-todo-list-api
+  containerImage: harbor.sunspear.tkg-vsphere-lab.winterfell.live/bizops/todos
   ingressUrl: todos.ironislands.tkg-vsphere-lab.winterfell.live
   dbPassword: KeepItSimple1!

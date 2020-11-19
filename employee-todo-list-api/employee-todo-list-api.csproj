@@ -14,6 +14,27 @@
     <PackageReference Include="Microsoft.AspNetCore.Rewrite" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.0" />
+    <!-- <PackageReference Include="Newtonsoft.Json" Version="12.0.2" /> -->
+    <!-- <PackageReference Include="Steeltoe.Management.ExporterCore"  Version="2.4.4"/> -->
+    <!-- <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="2.4.4" /> -->
+    <!-- <PackageReference Include="Steeltoe.Extensions.Logging.DynamicLogger" Version="2.4.4"/>
+    <PackageReference Include="Steeltoe.Management.TracingCore" Version="2.4.4"/> -->
+
+    <!-- Following came from start.steeltoe.io -->
+    <!-- <PackageReference Include="Steeltoe.Extensions.Logging.DynamicSerilogCore" Version="3.0.0" /> -->
+    <!-- <PackageReference Include="Steeltoe.Extensions.Logging.DynamicSerilogCore" Version="3.0.0" /> -->
+    <!-- <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="3.0.0" /> -->
+    <!-- <PackageReference Include="Newtonsoft.Json" Version="12.0.2" /> -->
+
+    <!-- Following came from steeltoe examples -->
+    <!-- <PackageReference Include="Steeltoe.Discovery.ClientCore" Version="$(SteeltoeVersion)" />
+    <PackageReference Include="Steeltoe.Discovery.Eureka" Version="$(SteeltoeVersion)" /> -->
+    <!-- <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="3.0.1" /> -->
+    <!-- <PackageReference Include="Steeltoe.Common.Hosting" Version="3.0.1" /> -->
+    <PackageReference Include="Steeltoe.Management.TracingCore" Version="3.0.1" />
+    <!-- <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundryCore" Version="3.0.1" /> -->
+
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

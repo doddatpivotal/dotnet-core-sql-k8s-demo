@@ -13,7 +13,8 @@ During my development, I have containerized the application and published the co
 You can customize for your environment by editing `k8s/values.yaml`.  Definitely do this if you are using the ingress.
 
 ```bash
-ytt -f k8s/ | kapp deploy -n dotnet -a todos -y -f -
+kubectl create ns todos
+ytt --ignore-unknown-comments -f k8s/ | kapp deploy -n bizops -a todos -y -f -
 ```
 
 If you have used the ingress, then access the app via the ingress URL.  Alternatively, you can access it through the todo Loadbalancer service.
