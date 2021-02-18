@@ -14,7 +14,7 @@ You can customize for your environment by editing `k8s/values.yaml`.  Definitely
 
 ```bash
 kubectl create ns todos
-ytt --ignore-unknown-comments -f k8s/ | kapp deploy -n bizops -a todos -y -f -
+ytt --ignore-unknown-comments -f k8s/ | kapp deploy -n todos -a todos -y -f -
 ```
 
 If you have used the ingress, then access the app via the ingress URL.  Alternatively, you can access it through the todo Loadbalancer service.
