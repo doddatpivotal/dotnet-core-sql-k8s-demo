@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using employee_todo_list_api.Data;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace employee_todo_list_api.Controllers
 {
@@ -41,12 +42,13 @@ namespace employee_todo_list_api.Controllers
 
         // GET: api/Employees/id
         [HttpGet("{id}", Name = "GetEmployeeById")]
-        public async Task<IActionResult> GetEmployeeById(string id)
+        public async Task<IActionResult> GetEmployeeById(int id)
         {
             var foundEmployee = await _context.Employees.FindAsync(id);
             if (foundEmployee == null)
             {
-                return BadRequest();
+                this.logger.LogInformation("can't find employee");
+                return StatusCode(500);
             }
             return Ok(mapper.Map<EmployeeViewModel>(foundEmployee));
         }

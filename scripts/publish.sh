@@ -1,2 +1,2 @@
-docker tag employee-todo-list-api harbor.sunspear.tkg-vsphere-lab.winterfell.live/bizops/todos
-docker push harbor.sunspear.tkg-vsphere-lab.winterfell.live/bizops/todos
+docker tag employee-todo-list-api winterfell2.azurecr.io/bizops/todos
+docker push winterfell2.azurecr.io/bizops/todos

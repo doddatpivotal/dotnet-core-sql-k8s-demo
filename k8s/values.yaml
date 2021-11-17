@@ -2,6 +2,6 @@
 ---
 todosApp:
 #   containerImage: dpfefferatpivotal/employee-todo-list-api
-  containerImage: winterfell.azurecr.io/todos/todos
-  ingressUrl: todos.ironislands.tkg-azure-lab.winterfell.live
+  containerImage: winterfell2.azurecr.io/bizops/todos
+  ingressUrl: todos.tap-red.tkg-azure-e2-lab.winterfell.life
   dbPassword: KeepItSimple1!

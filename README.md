@@ -22,3 +22,16 @@ If you have used the ingress, then access the app via the ingress URL.  Alternat
 ## Thank You ultrasonicsoft
 
 Thank you to https://github.com/ultrasonicsoft/employee-todo-list.git for the majority of the source code for this project and the basis for my own learning.
+
+## Load Runner
+
+2. Run locust via docker
+
+```bash
+docker run -p 8089:8089 -v $PWD:/mnt/locust locustio/locust -f /mnt/locust/traffic-generator/locustfile.py -H http://todos.tap-red.tkg-azure-e2-lab.winterfell.life
+```
+
+3. Access Locus UI
+
+```bash
+open http://localhost:8089

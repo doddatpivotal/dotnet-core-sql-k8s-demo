@@ -9,43 +9,36 @@ using Microsoft.AspNetCore.Rewrite;
 using employee_todo_list_api.Data;
 using System.Net;
 using Microsoft.EntityFrameworkCore;
-
-// using Steeltoe.Management.Endpoint.Metrics;
 using Steeltoe.Management.Tracing;
-using OpenTelemetry.Resources;
-using System.Collections.Generic;
-// using Steeltoe.Management.Kubernetes;
-// using Steeltoe.Common.Kubernetes;
-// using Steeltoe.Extensions.Configuration.Kubernetes;
-// using Steeltoe.Management.Endpoint;
-
+using OpenTelemetry.Trace;
+using Steeltoe.Management.Endpoint;
 
 namespace employee_todo_list_api
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
-
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
 
-            // services.AddPrometheusActuator(Configuration);
-            // services.AddMetricsActuator(Configuration);
-            // services.AddAllActuators(Configuration);
-            services.AddDistributedTracing(Configuration, builder =>
+            // Add Observability Features
+            services.AddAllActuators(Configuration);
+            services.AddDistributedTracingAspNetCore(trace =>
             {
-              builder.SetResource(new Resource(new Dictionary<string, object>
-                {
-                    ["application"] = Configuration["management:tracing:exporter:zipkin:applicationName"],
-                    ["cluster"] = Configuration["management:tracing:exporter:zipkin:cluster"],
-                })).UseZipkinWithTraceOptions(services);
+                trace
+                    .AddProcessor(new ExtraTagProcessor(Configuration))
+                    .AddSqlClientInstrumentation( options => {
+                        options.SetDbStatementForText = true;
+                        options.EnableConnectionLevelAttributes = true;
+                    });
             });
+
 
             services.AddCors(options =>
             {
@@ -102,9 +95,10 @@ namespace employee_todo_list_api
 
             app.UseAuthorization();
 
+            // Add Observability Features
             app.UseEndpoints(endpoints =>
             {
-                // endpoints.MapAllActuators();
+                endpoints.MapAllActuators();
                 endpoints.MapControllers();
             });
 

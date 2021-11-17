@@ -16,6 +16,11 @@ spec:
     metadata:
       labels:
         app: todos
+      annotations:
+        prometheus.io/scrape: 'true'
+        prometheus.io/scheme: 'http'
+        prometheus.io/port: '8080'
+        prometheus.io/path: '/actuator/prometheus'
     spec:
       containers:
       - name: todos
@@ -39,7 +44,7 @@ spec:
       targetPort: 8080
   type: LoadBalancer
 ---
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: todos
@@ -50,7 +55,11 @@ spec:
   - host: #@ data.values.todosApp.ingressUrl
     http:
       paths:
-      - backend:
-          serviceName: todos
-          servicePort: 80
-      
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: todos
+            port:
+              number: 80
+    

@@ -2,8 +2,8 @@ export TBS_NAMESPACE=todos
 export IMAGE_NAME=todos
 # export LOCAL_PATH=employee-todo-list-api/bin/Debug/netcoreapp3.1/employee-todo-list-api.dll
 export LOCAL_PATH=employee-todo-list-api/
-export IMAGE_REPOSITORY=winterfell.azurecr.io/todos/todos
-export REGISTRY=winterfell.azurecr.io
+export IMAGE_REPOSITORY=winterfell2.azurecr.io/todos/todos
+export REGISTRY=winterfell2.azurecr.io
 export REGISTRY_USER=demo-token
 export REGISTRY_PW=jW/9dg6dQYhVesgSvhf8GeYvk9/jERKe
 

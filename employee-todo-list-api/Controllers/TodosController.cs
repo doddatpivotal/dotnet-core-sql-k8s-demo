@@ -36,7 +36,6 @@ namespace employee_todo_list_api.Controllers
 
             var Todos = await Task.Run(() => _context.Todos.Where(t => t.EmployeeId == employeeId).ToList());
 
-
             return Todos;
         }
 
@@ -60,7 +59,7 @@ namespace employee_todo_list_api.Controllers
             //{
             //    return BadRequest();
             //}
-            this.logger.LogInformation("hello world");
+            this.logger.LogInformation("Creating todo");
 
             foreach (ModelError error in ModelState.Values.SelectMany(v => v.Errors))
                 {
