@@ -13,17 +13,17 @@ class UserBehavior(TaskSet):
     def on_start(self):
         self.home()
 
-    @task(3)
+    @task(14)
     def home(self):
         logging.info("Accessing Home Page")
         self.client.get("/")
 
-    @task(3)
+    @task(15)
     def findOwners(self):
         logging.info("Finding Employees")
         self.client.get("/api/employees")
 
-    @task(3)
+    @task(13)
     def accessEmployees(self):
         logging.info("Accessing Employees Page")
         self.client.get("/index.html")
