@@ -1,2 +1,5 @@
-docker tag employee-todo-list-api winterfell2.azurecr.io/bizops/todos
-docker push winterfell2.azurecr.io/bizops/todos
+: ${PARAMS_YAML?"Need to set PARAMS_YAML environment variable"}
+
+TAG=$(yq e .todosApp.containerImage $PARAMS_YAML)
+docker tag employee-todo-list-api $TAG
+docker push $TAG

@@ -10,28 +10,34 @@ During my development, I have containerized the application and published the co
 
 >Note: Requires Carvel tools [kapp](https://get-kapp.io) and [ytt](https://get-ytt.io)
 
-You can customize for your environment by editing `k8s/values.yaml`.  Definitely do this if you are using the ingress.
+Make a copy of `local-config/values-REDACTED.yaml` and customize for your environment.  Then set the environment variable `PARAMS_YAML` to the location of your copied file.  Mine is `local-values/values.yaml` which is in the `.gitignore`.
 
 ```bash
-kubectl create ns todos
-ytt --ignore-unknown-comments -f k8s/ | kapp deploy -n todos -a todos -y -f -
+export PARAMS_YAML=local-config/values.yaml
+NAMESPACE=$(yq e .todosApp.namspace $PARAMS_YAML)
+
+kubectl create ns $NAMESPACE -oyaml --dry-run=client | kubectl apply -f -
+
+ytt --ignore-unknown-comments -f k8s/ -f $PARAMS_YAML| kapp deploy -n $NAMESPACE -a todos -y -f -
 ```
 
 If you have used the ingress, then access the app via the ingress URL.  Alternatively, you can access it through the todo Loadbalancer service.
 
-## Thank You ultrasonicsoft
-
-Thank you to https://github.com/ultrasonicsoft/employee-todo-list.git for the majority of the source code for this project and the basis for my own learning.
-
 ## Load Runner
 
-2. Run locust via docker
+1. Run locust via docker
 
 ```bash
-docker run -p 8089:8089 -v $PWD:/mnt/locust locustio/locust -f /mnt/locust/traffic-generator/locustfile.py -H http://todos.tap-red.tkg-azure-e2-lab.winterfell.life
+./scripts/load.sh
 ```
 
-3. Access Locus UI
+2. Access Locus UI
 
 ```bash
 open http://localhost:8089
+
+```
+
+## Thank You ultrasonicsoft
+
+Thank you to https://github.com/ultrasonicsoft/employee-todo-list.git for the majority of the source code for this project and the basis for my own learning.

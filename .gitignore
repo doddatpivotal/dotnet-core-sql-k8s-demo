@@ -2,3 +2,9 @@
 todo.md
 .vscode/
 __pycache__
+
+
+local-config/*
+
+!local-config/*-REDACTED.yaml
+!local-config/.gitkeep

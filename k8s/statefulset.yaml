@@ -14,13 +14,14 @@ spec:
     metadata:
       labels:
         app: mssql
+        app-tier: db
     spec:
       terminationGracePeriodSeconds: 30
       securityContext:
         fsGroup: 10001
       containers:
       - name: mssql
-        image: mcr.microsoft.com/mssql/server:2019-latest
+        image: #@ data.values.todosApp.mssql_image
         ports:
         - containerPort: 1433
         env:
@@ -33,6 +34,13 @@ spec:
         volumeMounts:
         - name: mssql
           mountPath: /var/opt/mssql
+        resources:
+          requests:
+            memory: 1G
+            cpu: "1"
+          limits:
+            memory: 2G
+            cpu: "1"
   volumeClaimTemplates:
     - metadata:
         name: mssql
@@ -42,7 +50,7 @@ spec:
         accessModes: [ "ReadWriteOnce" ]
         resources:
           requests:
-            storage: 4Gi
+            storage: 1Gi
 ---
 apiVersion: v1
 kind: Service
