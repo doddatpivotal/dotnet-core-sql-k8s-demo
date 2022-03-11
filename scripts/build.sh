@@ -1,4 +1,4 @@
 pushd employee-todo-list-app
-npm run build
+npm install build
 popd
 dotnet build employee-todo-list-api
