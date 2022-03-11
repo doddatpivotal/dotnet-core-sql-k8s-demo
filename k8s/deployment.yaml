@@ -33,11 +33,11 @@ spec:
           value: #@ "Server=mssql;Database=Master;User ID=sa;Password=" + data.values.todosApp.dbPassword + ";MultipleActiveResultSets=true;"
         resources:
           requests:
-            memory: 1G
-            cpu: "1"
+            memory: 512Mi
+            cpu: "500m"
           limits:
-            memory: 2G
-            cpu: "1"
+            memory: 512Mi
+            cpu: "500m"
 
 ---
 apiVersion: v1
