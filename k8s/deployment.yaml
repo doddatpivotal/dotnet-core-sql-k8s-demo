@@ -26,6 +26,7 @@ spec:
       containers:
       - name: todos
         image: #@ data.values.todosApp.containerImage
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
         env:
