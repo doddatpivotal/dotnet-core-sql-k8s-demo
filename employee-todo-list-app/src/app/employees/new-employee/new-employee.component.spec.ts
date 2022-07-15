@@ -19,7 +19,4 @@ describe('NewEmployeeComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
 });

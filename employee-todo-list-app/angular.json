@@ -121,5 +121,8 @@
       }
     }
   },
-  "defaultProject": "employee-todo-list-app"
+  "defaultProject": "employee-todo-list-app",
+  "cli": {
+    "analytics": false
+  }
 }
