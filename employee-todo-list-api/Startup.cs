@@ -98,7 +98,7 @@ namespace employee_todo_list_api
             // Add Observability Features
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapAllActuators();
+                endpoints.MapAllActuators(null);
                 endpoints.MapControllers();
             });
 
