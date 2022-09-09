@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Steeltoe.Management.Tracing;
 using OpenTelemetry.Trace;
 using Steeltoe.Management.Endpoint;
+using Steeltoe.Management.Endpoint.Metrics;
 
 namespace employee_todo_list_api
 {
@@ -29,6 +30,7 @@ namespace employee_todo_list_api
 
             // Add Observability Features
             services.AddAllActuators(Configuration);
+            services.AddMetricsActuatorServices(Configuration);
             services.AddDistributedTracingAspNetCore(trace =>
             {
                 trace
@@ -100,6 +102,8 @@ namespace employee_todo_list_api
             {
                 endpoints.MapAllActuators(null);
                 endpoints.MapControllers();
+                endpoints.Map<MetricsEndpoint>();
+
             });
 
             UpdateDatabase(app);
