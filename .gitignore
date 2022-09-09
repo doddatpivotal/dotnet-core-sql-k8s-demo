@@ -8,3 +8,5 @@ local-config/*
 
 !local-config/*-REDACTED.yaml
 !local-config/.gitkeep
+
+*.code-workspace
