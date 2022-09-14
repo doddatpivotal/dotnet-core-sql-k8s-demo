@@ -6,16 +6,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: todos
+  name: todos-api
 spec:
   replicas: 1
   selector:
      matchLabels:
-       app: todos
+       app: todos-api
   template:
     metadata:
       labels:
-        app: todos
+        app: todos-api
         app-tier: web-app
       annotations:
         prometheus.io/scrape: 'true'
@@ -24,8 +24,8 @@ spec:
         prometheus.io/path: '/actuator/prometheus'
     spec:
       containers:
-      - name: todos
-        image: #@ data.values.todosApp.containerImage
+      - name: todos-api
+        image: #@ data.values.todosApp.apiContainerImage
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
@@ -44,32 +44,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: todos
+  name: todos-api
 spec:
   selector:
-    app: todos
+    app: todos-api
   ports:
     - protocol: TCP
       port: 80
       targetPort: 8080
   type: ClusterIP
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: todos
-  labels:
-    app: todos
-spec:
-  rules:
-  - host: #@ data.values.todosApp.ingressUrl
-    http:
-      paths:
-      - pathType: Prefix
-        path: "/"
-        backend:
-          service:
-            name: todos
-            port:
-              number: 80
     

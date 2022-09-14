@@ -1,9 +1,10 @@
 #@data/values
 ---
 todosApp:
-  containerImage: harbor.haas-441.tkg-vsphere-lab.winterfell.life/lob-1/todos:V1
-  ingressUrl: todos.multi-tenant-1.shared-services-1.haas-441.pez.vmware.com
+  apiContainerImage: dpfefferatpivotal/todos-api
+  appContainerImage: dpfefferatpivotal/todos-app
+  ingressUrl: todos.example.com
   dbPassword: SuperSecret1!
   mssql_image: mcr.microsoft.com/mssql/server:2019-latest
-  namespace: lob-1-todos
-  cluster_builder: winterfell2.azurecr.io/tbs:clusterbuilder-base@sha256:1b1541e3c3c25353e291b95de431b756eba19f704d41c92b263139a495bce0e6
+  namespace: todos
+  cluster_builder: paketobuildpacks/builder:base

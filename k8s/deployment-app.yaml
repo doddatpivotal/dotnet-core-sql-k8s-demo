@@ -1,0 +1,56 @@
+#! variables that need to be externally configurable
+#! are specified in a data values file
+
+#@ load("@ytt:data", "data")
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todos-app
+spec:
+  replicas: 1
+  selector:
+     matchLabels:
+       app: todos-app
+  template:
+    metadata:
+      labels:
+        app: todos-app
+        app-tier: web-app
+      annotations:
+        prometheus.io/scrape: 'true'
+        prometheus.io/scheme: 'http'
+        prometheus.io/port: '8080'
+        prometheus.io/path: '/actuator/prometheus'
+    spec:
+      containers:
+      - name: todos-app
+        image: #@ data.values.todosApp.appContainerImage
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        env:
+        - name: PORT
+          value: "8080"
+        resources:
+          requests:
+            memory: 256Mi
+            cpu: "200m"
+          limits:
+            memory: 256Mi
+            cpu: "200m"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: todos-app
+spec:
+  selector:
+    app: todos-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: ClusterIP
+    

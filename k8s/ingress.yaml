@@ -1,0 +1,28 @@
+#@ load("@ytt:data", "data")
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: todos
+  labels:
+    app: todos
+spec:
+  rules:
+  - host: #@ data.values.todosApp.ingressUrl
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/api"
+        backend:
+          service:
+            name: todos-api
+            port:
+              number: 80
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: todos-app
+            port:
+              number: 80
