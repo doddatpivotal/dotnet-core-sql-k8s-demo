@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --host 0.0.0.0",
-    "build": "ng build --outputPath dist",
+    "build": "ng build --output-path dist",
     "test": "ng test --browsers=ChromeHeadless --watch=false",
     "lint": "ng lint",
     "e2e": "ng e2e"
