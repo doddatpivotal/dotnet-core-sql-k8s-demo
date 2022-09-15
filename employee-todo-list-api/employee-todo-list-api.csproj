@@ -30,7 +30,7 @@
     <!-- Specific versions to resolve CVE.  Should look to see if we should bump these -->
     <PackageReference Include="System.Private.Uri" Version="4.3.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="System.Net.Http" Version="4.3.1" />
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
     
   </ItemGroup>
 
